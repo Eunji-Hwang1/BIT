@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIT</title>
+    <style>
+      *{
+        background-color: #1b275e;
+        color: black;
+        font-family: 'Gowun Dodum', sans-serif;
+      }
+      .allbody {
+        width: 100%;
+        min-width:800px;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        text-align: center;
+        flex-wrap: wrap;
+        justify-content:center;
+        margin-top:60px;
+        z-index:1;
+        background-color:#1b275e;
+
+      }
+      body{
+        margin: auto;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .input::file-selector-button {
+        margin-top: 3px;
+        color: black;
+        text-align: center;
+        background-color: whitesmoke;
+        width: 80px;
+        height: 38px;
+        font-size: 15px;
+        border-radius:10px;
+        font-family:'Gowun Dodum', sans-serif;
+      }
+      .input
+      {
+        background-color:whitesmoke;
+        margin:0px;
+        margin-top:20px;
+        margin-left:80px;
+        margin-right:10px;
+        width:250px;
+      }
+      .topbox{
+        width: 100%;
+        height: 105px;
+        border: 0px solid white;
+        background-color: #a7b3e9;
+        box-sizing: border-box;
+        margin: 0 auto 0px; 
+        position: fixed;
+        left:0px;
+        top:0%;
+        transform: translateX(-0%); 
+        z-index: 6;
+      }
+      .box1{
+        width: 300px;
+        height: 30px;
+        margin:15px;
+        margin-bottom:0px;
+        margin-left:27px;
+        box-sizing: border-box;
+        background-color: whitesmoke;
+        border-radius:10px;
+      }
+      .box3{
+          width: 520px;
+          height: 70px;
+          margin: 14px;
+          margin-top:0px;
+          box-sizing: border-box;
+          background-color:whitesmoke;
+          display:flex;
+      }
+      .prompt{
+        background-color:whitesmoke; 
+        display:flex;
+        flex-direction: row;
+      }
+      
+      .ppbox{
+        width : 320px;
+        height : 90px;
+        border : 0px solid black;
+        margin: 12px;
+        float: left;
+        box-sizing: border-box;   
+        background-color:whitesmoke; 
+      }
+      .npbox{
+        width : 320px;
+        height : 90px;
+        border : 0px solid black;
+        margin: 12px;
+        float: left;
+        box-sizing: border-box;   
+        background-color:whitesmoke; 
+      }
+      .filter{
+        width: 318px;
+        height: 210px;
+        border: 0px solid black;
+        box-sizing: border-box;
+        margin: -8px;
+        margin-top:28px;
+        background-color:whitesmoke;
+        float:right;
+        margin-right:80px;
+      }
+      .ppbox2{
+        width : 520px;
+        height : 90px;
+        text-align:center;
+        border : 0px solid black;
+        margin: 12px;
+        box-sizing: border-box;   
+        background-color:whitesmoke; 
+      }
+      .drawbox{
+        width:512px;
+        height: 512px;
+        border: 1px solid black;
+        background-color: white;
+        display: flex;
+        box-sizing: border-box;
+        padding : 1rem;
+        border-radius: 20px;
+        align-items: center;
+        margin-left: 10px;
+        margin-top:20px;
+      }
+      
+      .toolbox{
+        width:40px;
+        height:620px;
+        display: flex;
+        flex-direction: column-reverse;
+        margin-left:0px;
+        padding-right: 0px;
+        background-color: whitesmoke;
+        box-sizing: border-box;
+        border-radius:10px;
+      }
+      .settingsbtn {
+        transform: scale(0.98);
+        color: white;
+        background-color: rgb(32, 25, 25);
+        padding:5px;
+        width: 150px;
+        height: 45px;
+        font-size: 26px;
+        margin-bottom: 30px;
+        margin-left:48px;
+      }
+      .createbtn {
+        transform: scale(0.98);
+        background: linear-gradient(to right, #7FAAFF, #3450ce);
+        color:white;
+        margin: 0px;
+        padding:5px;
+        width: 160px;
+        height: 70px;
+        font-size: 26px;
+        font-weight: 500;
+        border-radius: 15px;
+        box-shadow:0 3px 12px 0 (rgba(242, 52, 65, 0.5));
+        border: 1px solid white;
+      }
+      /* webkit 브라우저 스크롤바 속성*/
+      ::-webkit-scrollbar {
+        width: 5px; /*스크롤바의 너비*/
+      }
+      ::-webkit-scrollbar-thumb {
+       background-color: black; /*스크롤바의 색상*/
+      }
+       
+      ::-webkit-scrollbar-track {
+        background-color: rgba(80, 80, 80, 0.884); /*스크롤바 트랙 색상*/
+      }
+      
+      /* ----------- 스크롤바 ----------- 
+       Chrome, Whale, Edge 
+      스크롤바 가로 사이즈 */
+      ::-webkit-scrollbar {
+        width: 11px;
+      }
+      /* 스크롤바 막대기 */
+      ::-webkit-scrollbar-thumb {
+        border-radius: 11px;
+        background-color: #555;
+      }
+      /* 마우스를 갖다 댔을 때을 색 */
+      ::-webkit-scrollbar-thumb:hover {
+        background-color: rgb(101, 30, 143);
+      }
+      /* 눌렀을 때 투톤 */
+      ::-webkit-scrollbar-thumb:active {
+        background: linear-gradient(#642bff, #ff22e6);
+      }
+      /* 마우스를 갖다 대지 않았을 때의 스크롤바 백그라운드 */
+      ::-webkit-scrollbar-track {
+        background-color: #b8b8b8;
+      }
+      /* 마우스를 갖다 댔을 때의 스크롤바 백그라운드 */
+      ::-webkit-scrollbar-track:hover {
+        background-color: #b8b8b8;
+      }      
+      
+      .popup {
+        display: none;
+        position: fixed;
+        left: 10px;
+        top: 180px;
+        width:550px;
+        min-width:550px;
+        height: 560px;
+        margin-left:0%;
+        margin-top: -95px;
+        z-index: 1000;
+        background: whitesmoke;
+        border: 1px solid #d1d8dd;
+        box-shadow: 0 0 6px 1px rgb(0 0 0 / 30%);
+        overflow: auto;
+        color:whtie;
+      }
+      
+      .popup2 {
+        display: none;
+        position: fixed;
+        left: 10px;
+        top: 180px;
+        width:595px;
+        min-width:595px;
+        height: 860px;
+        margin-left:0%;
+        margin-top: -95px;
+        z-index: 1000;
+        background: whitesmoke;
+        border: 1px solid #d1d8dd;
+        box-shadow: 0 0 6px 1px rgb(0 0 0 / 30%);
+        overflow: auto;
+      }
+ 
+
+      .style_button {
+        font-family: roboto;
+        letter-spacing: 1px;
+        padding: 0.7rem 0.5rem;
+        border-radius: 9px;
+        font-size: 1.5rem;
+        color: #eaeaea;
+        font-weight: bold;
+        background: linear-gradient(to right, #7FAAFF, #3450ce);
+        box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.5);
+        border: none;
+        cursor: pointer;
+        position: absolute;
+        overflow: hidden;
+        --a: initial;
+        margin-left: 20px;
+        width:240px;
+        top: 17px;
+        left:0%;
+        z-index:7;
+      }
+  
+      
+      .style_button:after {
+        content: "";
+        position: absolute;
+        top: var(--top);
+        left: var(--left);
+        width: var(--diameter);
+        height: var(--diameter);
+        transform: scale(0);
+        background-color: rgba(255, 255, 255, 0.4);
+        border-radius: 50%;
+        pointer-events: none;
+        animation: var(--a);
+        z-index:7;
+      }
+
+      .style_button2 {
+        font-family: roboto;
+        letter-spacing: 1px;
+        padding: 0.7rem 0.5rem;
+        border-radius: 9px;
+        font-size: 1.5rem;
+        color: #eaeaea;
+        font-weight: bold;
+        background: linear-gradient(to right, #7FAAFF, #3450ce);
+        box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.5);
+        border: none;
+        cursor: pointer;
+        position: absolute;
+        overflow: hidden;
+        --a: initial;
+        margin-left: 20px;
+        width:240px;
+        top: 17px;
+        left:0%;
+        z-index:7;
+      }
+
+      .style_button2:after {
+        content: "";
+        position: absolute;
+        top: var(--top);
+        left: var(--left);
+        width: var(--diameter);
+        height: var(--diameter);
+        transform: scale(0);
+        background-color: rgba(255, 255, 255, 0.4);
+        border-radius: 50%;
+        pointer-events: none;
+        animation: var(--a);
+        z-index:7;
+      }
+      
+      @keyframes ripple-effect {
+        100% {
+          transform: scale(1);
+          opacity: 0;
+        }
+      }
+
+      .Shutdownbutton
+      {
+        float: right;
+        border-radius: 5px;
+        size: 20px;
+        height: 25px;
+        margin-top:3px;
+        margin-right:5px;
+        background:#C6D0FF;
+      }
+      .Shutdownbutton:hover
+      {
+        background-color:red;
+        box-shadow: 0 3px 12px 0(rgba(200, 200, 200, 0.3));
+        cursor: pointer;
+      }
+      
+      /*list.css*/
+      .my_list{
+        width: 400px;
+        height: 560px;
+        border: 1px solid white;
+        margin-bottom: 20px;
+        border: 1px solid;      
+        border-radius: 10%;
+        padding:1px;
+        align-content: center;
+        transform:scale(0.7);
+        z-index:2;
+        background-color:white;
+      }
+      .index_box{
+        border:0px;
+        width:20px;
+        margin-top: 5px;
+        font-size: 12px;
+        align-self: center;
+        background-color:white;
+
+      }
+      .info_box{
+        border:0px;
+        width:320px;
+        margin-top: 2px;
+        font-size: 14px;
+        float:right;
+        margin-left:-10px;
+        background-color:white;
+      }
+      
+      <!-- #load{
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        position: fixed;
+        display: block;
+        opacity: 0.8;
+        background: white;
+        z-index: 99;
+        text-align: center;
+      }
+
+      #load > img{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 100;
+      } -->
+      
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Damion&family=Gowun+Dodum&family=Kalam&family=Monoton&family=Nanum+Brush+Script&display=swap" rel="stylesheet">
+    
+    <!-- <script
+        src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+        crossorigin="anonymous">
+    </script> -->
+    <script>
+      const downloadLink = document.createElement('a');
+      var startX, startY;
+
+      function fileselect(){
+        var file = document.getElementById("filename").files[0];
+        var formData = new FormData();
+        formData.append("file", file);
+
+        $.ajax({
+          url:"/upload_done",
+          type:"POST",
+          data: formData,
+          contentType: false, // 필수: 기본값이 'application/x-www-form-urlencoded; charset=UTF-8'이므로 false로 설정
+          processData: false, // 필수: 데이터를 변환하지 않도록 false로 설정
+          success: function(response){
+            var image_data=response.image_path;
+            var canvas=document.getElementById('cnvs');
+            canvas.innerHTML="";
+            var context=canvas.getContext('2d');
+            var img=new Image();
+            // 이미지 로드가 완료되면 실행
+            img.onload = function() {
+              context.drawImage(img, 0, 0); // 이미지를 canvas에 그립니다.
+            };
+
+            img.src = image_data; // 이미지 로드 시작
+          },
+          error: function(error) {
+              console.log(error);
+          }
+        });
+      }
+      function fileselect2(){
+        var imageurl = document.getElementById("filename").value;
+        var imagename = imageurl.split("\\");
+        var image = imagename[imagename.length-1];
+        var imagebox = document.getElementById("cnvs");
+        imagebox.style.backgroundImage = "url(" + image + ")";
+    
+        var cnvs = document.getElementById('cnvs');
+        var ctx = cnvs.getContext('2d');
+    
+        // 이미지 출력 전에 기존 이미지를 지움
+        ctx.clearRect(0, 0, cnvs.width, cnvs.height);
+    
+        localStorage.removeItem('imgData');
+    
+        // Ajax 요청 수행
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/upload_done", true);
+        xhr.responseType = "json";
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) 
+            {
+              var response = xhr.response;
+              if (response.success) {
+                  var image_path = response.image_path;
+                  // URL에 유니크한 값(타임스탬프)을 추가하여 고유한 URL 생성
+                  var uniqueImagePath = image_path + "?" + Date.now();
+                  var img = new Image();
+  
+                  img.onload = function() {
+                      // 이미지를 그림판에 그리기
+                      ctx.clearRect(0, 0, cnvs.width, cnvs.height);
+                      ctx.drawImage(img, 0, 0, cnvs.width, cnvs.height);                
+                  };                                                                          
+                  img.src = uniqueImagePath;
+  
+                  // 파일 입력 필드 초기화
+                  document.getElementById("filename").value = "";
+              } else {
+                  console.log(response.message);
+              }
+            }
+        };
+        var formData = new FormData();
+        formData.append("image", document.getElementById("filename").files[0]);
+        xhr.send(formData);
+      }
+      
+      function selectfilter(number)
+      {
+        var filter=document.getElementById("sfilter");
+        if (number=="1") {text="실사화";}
+        else if(number=="2") {text="애니메이션화";}
+      
+        filter.setAttribute("value", text)
+      }
+
+      $(document).ready(function(){
+        
+        var cnvs = document.getElementById('cnvs');
+        var ctx = cnvs.getContext('2d');
+        if (cnvs.getContext) {
+            var isDraw = false;
+            ctx.lineCap='round';
+            ctx.lineJoin='round';
+        
+            if (localStorage['imgData']) {
+                var aData = new Array();
+                aData = localStorage['imgData'].split('|');
+                var imgData = ctx.createImageData(cnvs.width, cnvs.height);
+
+                var j = 0;
+                for (var i=0; i<imgData.data.length; i+=4) {
+                    imgData.data[i]    = aData[j+0]; 
+                    imgData.data[i+1] = aData[j+1]; 
+                    imgData.data[i+2] = aData[j+2];
+                    imgData.data[i+3] = 0xFF; 
+                    j += 3;
+                }
+                ctx.putImageData(imgData, 0, 0);
+            // 이미지 초기화
+            } 
+            else {
+                ctx.fillStyle = "white";
+                ctx.fillRect(0, 0, cnvs.width, cnvs.height);
+            }
+
+            // 그리기 옵션
+            var dot = 1;
+            var color = 'rgb(0, 0, 0)';
+
+            // 그리기 옵션 - 도트크기
+            $('#dot').bind('change', function(){  dot = $('#dot').val(); });
+            // 그리기 옵션 - 색깔
+            $('#color').bind('change', function(){ color = $('#color').val(); });
+
+            // 이벤트 핸들러 연결
+            $('#cnvs').mousemove(function(e){
+                // 그릴 수 있으면 그린다.
+                if (isDraw) draw(e);        
+            });
+            
+            $('#cnvs').mousedown(function(e){
+                // 왼쪽 버튼 down 이면 그릴 수 있다고 선언
+                if (e.button===0) {
+                    isDraw = true;
+                    startX = e.offsetX;
+                    startY = e.offsetY;
+                    draw(e);
+                }
+            });
+            
+            $('#cnvs').mouseup(function(e){
+                // 버튼 up 이면 그릴 수 없다고 선언
+                isDraw = false;   
+
+            });
+
+            
+
+            function downloadCanvasImage(canvas, filename) {
+                // 캔버스의 이미지를 데이터 URL로 변환
+                var dataURL = canvas.toDataURL();
+            
+                // 캔버스의 이미지 데이터를 Blob 형태로 변환
+                var blob = dataURLToBlob(dataURL);
+            
+                // a 태그를 생성하여 다운로드 링크로 사용
+                var downloadLink = document.createElement('a');
+                downloadLink.href = URL.createObjectURL(blob);
+                downloadLink.download = 'canvas_image.png';
+            
+                // 링크를 클릭하여 이미지를 다운로드
+                downloadLink.click();
+            }
+
+            //이미지 보내는 코드 
+            function sendImageToServer() {
+                var imageBlob = cnvs.toBlob();
+                var imagePromptText = document.getElementById('image_prompt_text').value;
+            
+                // FormData 객체를 생성하고 데이터를 추가합니다.
+                var formData = new FormData();
+                formData.append('image_data', imageBlob);
+                formData.append('image_prompt', imagePromptText);
+            
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '/change_image', true);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                        var response = JSON.parse(xhr.responseText);
+                        // 서버로부터 받은 데이터를 처리하는 로직을 추가하세요
+                    } else if (xhr.readyState === XMLHttpRequest.DONE) {
+                        // 에러 처리 로직을 추가하세요
+                    }
+                };
+                xhr.send(formData);
+            }
+
+            // 그리기
+            function getCanvasCoordinates(event) {
+
+                var cnvsRect = cnvs.getBoundingClientRect(); // 그림판 요소의 위치와 크기 정보
+                var offsetX = event.clientX - cnvsRect.left; // 그림판 내에서의 X 좌표
+                var offsetY = event.clientY - cnvsRect.top; // 그림판 내에서의 Y 좌표
+                return { x: offsetX, y: offsetY };
+            }
+            
+            function draw(e) {
+                var currentColor = color; // 변경된 부분: color 변수 사용
+                var currentPos = getCanvasCoordinates(e); // 그림판 내에서의 마우스 좌표
+            
+                ctx.beginPath();
+                ctx.moveTo(startX, startY);
+                ctx.lineTo(currentPos.x, currentPos.y);
+                ctx.lineWidth = dot;
+                ctx.strokeStyle = currentColor; // 변경된 부분: 현재 색상 적용
+                ctx.stroke();
+                ctx.closePath();
+            
+                startX = currentPos.x;
+                startY = currentPos.y;
+            
+                if (currentPos.x < 0 || currentPos.y < 0 || currentPos.x > cnvs.width || currentPos.y > cnvs.height) {
+                    return 0;
+                }
+            }
+
+            // 지우기
+            function clearCanvas()
+            {
+                ctx.clearRect(0, 0, cnvs.width, cnvs.height);
+                ctx.beginPath();
+
+                localStorage.removeItem('imgData');
+            }
+            
+
+            function saveCanvas() {
+              var cnvs = document.getElementById('cnvs');
+              var ctx = cnvs.getContext('2d');
+              ctx.fillRect=(0, 0, cnvs.width, cnvs.height);
+              
+              // 그렸던 그림을 이미지 데이터로 저장
+              var imgData = ctx.getImageData(0, 0, cnvs.width, cnvs.height);
+              var aData = new Array();
+              for (var i = 0; i < imgData.data.length; i += 4) {
+                  aData.push(imgData.data[i]);
+                  aData.push(imgData.data[i + 1]);
+                  aData.push(imgData.data[i + 2]);
+                  // 알파 채널도 저장합니다.
+                  aData.push(imgData.data[i + 3]);
+              }
+
+              localStorage['imgData'] = aData.join('|');
+              ctx.fillStyle = white;
+              ctx.fillRect(0, 0, cnvs.width, cnvs.height);
+              
+              // 흰 배경으로 설정
+              //ctx.fillStyle='white';
+
+              // 저장된 그림을 다시 그립니다.
+              var savedImgData = localStorage['imgData'];
+              if (savedImgData) {
+                savedImgData = savedImgData.split('|');
+                savedImgData = savedImgData.split('|');
+                var pixelIndex = 0;
+                var newImgData = ctx.createImageData(cnvs.width, cnvs.height);
+                for (var y = 0; y < cnvs.height; y++) {
+                    for (var x = 0; x < cnvs.width; x++) {
+                      newImgData.data[pixelIndex] = parseInt(savedImgData[pixelIndex]);
+                      newImgData.data[pixelIndex + 1] = parseInt(savedImgData[pixelIndex + 1]);
+                      newImgData.data[pixelIndex + 2] = parseInt(savedImgData[pixelIndex + 2]);
+                      newImgData.data[pixelIndex + 3] = parseInt(savedImgData[pixelIndex + 3]);
+                      pixelIndex += 4;
+                    }
+                }
+                ctx.putImageData(newImgData, 0, 0);
+              }
+
+
+              // 이미지 저장
+              var downloadLink = document.createElement('a');
+              downloadLink.href = cnvs.toDataURL();
+              downloadLink.download = 'canvas_image.png';
+              downloadLink.click();
+            }
+
+
+            // 전체지우기
+            $('button[id="btnAllDel"]').click(function(){
+                clearCanvas();
+            });
+            
+            var popup2= document.getElementById("popup2")
+            var display=popup2.style.display;
+            $('button[id="style_button2"]').click(function(){
+              if(display==""){
+                clearCanvas();};});
+
+            // 저장하기
+            $('button[id="btnSave"]').click(function(){
+                saveCanvas();
+            });
+        }
+
+        // canvas 사용불가
+        else { return;}
+      });
+
+      function generateImage() {
+        event.preventDefault();
+        var prompt=document.getElementById("p_text");
+        $.ajax({
+            url: "/search",
+            type: "get",
+            data: { ptext: prompt },
+            success: function(response) {
+                var image_data = response.image_data; // 서버에서 받아온 이미지 데이터
+                alert(image_data)
+                // 이미지 소스를 설정하여 이미지를 표시
+                var imgElement = document.createElement('generatedImage');
+                imgElement.src = image_data;
+                imgElement.width = 400;
+                imgElement.height = 500;
+
+                var imageBox = document.getElementById('Load_Image');
+                imageBox.innerHTML = '';
+                imageBox.appendChild(imgElement);
+                //event.preventDefault();
+
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+      }
+
+      function popupShow(){
+          $(".popup").show();
+          $(".popup2").hide();
+      }
+      
+      function popupShow2() {
+        $(".popup2").show();
+        $(".popup").hide();
+      }
+
+      function imgload(index)
+      {
+          link="static/img/"+index+".jpeg"
+          return link
+      }
+
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class="topbox">      
+        <img src="/static/logo.png" style="transform: scale(1.2); position:fixed; left:46.5%; top:18px; border-radius:10%;"/>
+        <button onclick="popupShow();" id = "style_button1" class="style_button">Text To Image</button>
+        <script>
+          const btn = document.getElementById('style_button1')
+    
+          const onClick = d => {
+            const { x, y, width, height} = btn.getBoundingClientRect()
+            const radius = Math.sqrt(width * width + height * height)
+            btn.style.setProperty('--diameter', radius * 2 + 'px')
+            const { clientX, clientY } = d
+            const left = (clientX - x - radius) / width * 100 + '%'
+            const top = (clientY - y - radius) / height * 100 + '%'
+    
+            btn.style.setProperty('--left', left)
+            btn.style.setProperty('--top', top)
+            btn.style.setProperty('--a', '')
+            setTimeout(() => {
+              btn.style.setProperty('--a', 'ripple-effect 500ms linear')
+            }, 5)
+          }
+    
+          btn.addEventListener('click', onClick)
+        </script>
+
+        <button onclick="popupShow2();" id="style_button2" class="style_button2" style="position:absolute; left:300px;">Image To Image</button>
+        <script>
+          const btn2 = document.getElementById('style_button2');
+
+          const onClick2 = d => {
+            const { x, y, width, height} = btn2.getBoundingClientRect();
+            const radius = Math.sqrt(width * width + height * height);
+            btn2.style.setProperty('--diameter', radius * 2 + 'px');
+            const { clientX, clientY } = d;
+            const left = (clientX - x - radius) / width * 100 + '%';
+            const top = (clientY - y - radius) / height * 100 + '%';
+
+            btn2.style.setProperty('--left', left);
+            btn2.style.setProperty('--top', top);
+            btn2.style.setProperty('--a', '');
+            setTimeout(() => {
+              btn2.style.setProperty('--a', 'ripple-effect 500ms linear');
+            }, 5);
+          }
+
+          btn2.addEventListener('click', onClick2);
+        </script>
+        
+        <script>
+          var resultwindow
+          var url
+          const beforeurl=[]
+          var i=0;
+          function openResult(image_url){
+            url = '/open_result?image_url=' + image_url;
+            resultwindow= window.open(url, '_blank', 'width=612, height=735');
+            if (resultwindow) {
+              beforeurl.unshift(resultwindow);
+            }
+          }
+          function closeResult(){
+            if (beforeurl.length > 0) {
+              var lastWindow = beforeurl.shift();
+              lastWindow.close();
+            }
+          }
+      </script>
+      <br>
+      <br>
+      <br>
+      <br>
+      <hr>
+    </div>
+    <div class="allbody">
+      
+      {% if length != 0%}
+      {% for list in std_list %}
+      <a href={{url_for("detail", index=list[0])}} style="width:360px; height:500px; display:flex; justify-content:center;">
+          <div class="my_list">
+              <h2 style="background-color:white; border-radius:10%;" >
+                  <div style="width:20px; margin:0px; margin-left:190px;">
+                      <p class="index_box" id="index" >{{list[0]+1}}</p>
+                  </div>
+                  <img id="image" src="static/img/{{photo_list[list[0]]}}" style="width: 400px; height: 400px;"/>
+                  <div style="width:380px; margin-left:8px; align-items: right;">
+                      <input class="info_box" value="입력한 문장: {{list[1]}}" style="font-size:15px;"/>
+                      <input class="info_box" value="제외할 문장: {{list[2]}}"/>
+                      <input class="info_box" value="사용한 필터: {{list[3]}}"/>
+                  </div>
+              </h2>
+          </div>
+      </a>
+      {% endfor %}{%else%}
+      <h2>생성할 이미지의 정보를 입력해 주세요</h2>
+      {% endif %}
+    </div>
+    <script>
+        function sendData(){
+          var pp=document.getElementById("p_text").value
+          var np=document.getElementById("n_text").value
+          var f=document.getElementById("sfilter").value
+          // 보낼 데이터를 객체로 생성
+          var dataToSend = {
+              ptext: pp,
+              ntext: np,
+              filter_num: f
+          };
+  
+          $.ajax({
+              url: "/search", // 데이터를 받아올 서버 엔드포인트 URL
+              type: "get",
+              data: dataToSend, // 데이터를 JSON 문자열로 변환하여 전송
+              success: function(response) {
+                  // 서버 응답을 받은 후 실행할 함수를 여기에 작성합니다.
+                  // 예를 들어, 이미지를 렌더링하거나 다른 처리를 수행할 수 있습니다.
+                  var image_url=response.image_file;
+                  closeResult();
+                  openResult(image_url);
+              },
+              error: function(error) {
+                  console.log(error);
+              }
+          });
+        }
+        function sendData2(){
+          var pp=document.getElementById("prompt").value
+          var image=document.getElementById("sfilter").value
+          // 보낼 데이터를 객체로 생성
+          var dataToSend = {
+              ptext: pp,
+              data_url: image
+          };
+  
+          $.ajax({
+              url: "/search2", // 데이터를 받아올 서버 엔드포인트 URL
+              type: "get",
+              data: dataToSend, // 데이터를 JSON 문자열로 변환하여 전송
+              success: function(response) {
+                  // 서버 응답을 받은 후 실행할 함수를 여기에 작성합니다.
+                  // 예를 들어, 이미지를 렌더링하거나 다른 처리를 수행할 수 있습니다.
+                  var image_url=response.image_file;
+                  closeResult();
+                  openResult(image_url);
+              },
+              error: function(error) {
+                  console.log(error);
+              }
+          });
+        }
+    </script>
+    
+    <div class="popup">
+      <b style="font-size: larger; background-color:whitesmoke; position:absolute; left:40%;">Text To Image</b>
+      <button onclick="popupShutdown();" class="Shutdownbutton">X</button>
+      <br>
+      <hr>
+      <!--언어 선택-->
+      <div class="box1">
+        <span style="background-color: whitesmoke;">
+            <select name = "language1" style="border-radius:10px; background-color:white;">
+                <option value ="korean" style="background-color:white;" selected>한국어</option>
+                <option value ="english" style="background-color:white;">영어</option>
+                <option value ="japanese" style="background-color:white;">일본어</option>
+                <option value ="chinese" style="background-color:white;">중국어</option>
+                <option value ="spanish" style="background-color:white;">스페인어</option>
+            </select>
+            <p style="display: inline; background-color:whitesmoke;">&nbsp;&nbsp;&nbsp;--&gt;&nbsp;&nbsp;&nbsp;</p>
+            <select name = "language1" style="border-radius:10px; background-color:white;">
+                <option value ="korean" style="background-color:white;">한국어</option>
+                <option value ="english" style="background-color:white;" selected>영어</option>
+                <option value ="japanese" style="background-color:white;">일본어</option>
+                <option value ="chinese" style="background-color:white;">중국어</option>
+                <option value ="spanish" style="background-color:white;">스페인어</option>
+            </select>
+          </span>    
+        </div>
+      <!-- 프롬프트, 필터 입력받는 칸 -->
+      <div class="prompt">
+        <div style="background-color:whitesmoke; display:flex; flex-direction:column">        
+            <div id="pp" class="ppbox">
+            <textarea cols="30" placeholder="positive prompt를 입력하세요" style="height: 80px; width: 310px; margin: 0px; word-wrap: break-word; border-radius:10px; background-color:white;" type="text" name="ptext" id="p_text"></textarea>
+            </div>
+            <div id="np" class="npbox">
+            <textarea cols="30" placeholder="negative prompt를 입력하세요" style="height: 80px; width: 310px; margin: 0px; word-wrap: break-word; border-radius:10px; background-color:white;" type="text" name="ntext" id="n_text"></textarea>
+            </div>
+        </div>
+        <div style="background-color:whitesmoke; display:flex; flex-direction:column; margin:9px;">
+        <div style="background-color: whitesmoke; display:flex; flex-direction:row;">
+            <input type="radius" style="width:72px; background-color:whitesmoke; border:0px;" value="선택된 필터: "/>
+            <input type="text" style="width:77px; background-color:whitesmoke; border:0px;" id="sfilter" name="filter" value=""/>
+        </div>
+        <button id="createbtn" onclick="sendData(); " class="createbtn">이미지 생성</button>
+        
+        </div>
+      </div>
+
+      <!-- 필터 선택 칸 -->
+      <div style="display: block; background-color: whitesmoke; margin-top:-30px;">
+        <div class="filter">
+          <button style="margin:5px; border-radius: 25px; width: 90px; height: 90px;  background-color:white;"  onclick="selectfilter(1)">
+              <img src="/static/img/64.jpeg" style="border-radius: 25px; width: 60px; height: 60px; background-color:white;" width="70px" height="80px;" />
+              <b style="background-color:white; border-radius:10px; background-color:white;">실사화</b>
+          </button>
+          <button style="margin:5px; border-radius: 25px; width: 90px; height: 90px;  background-color:white;" onclick="selectfilter(2)">
+              <img src="/static/img/55.jpeg" style="border-radius: 25px; width: 60px; height: 60px; background-color:white;" width="70px" height="80px;"/>
+              <b style="background-color:white; border-radius:10px; background-color:white;">애니메이션화</b>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="popup2" id="popup2">
+      <b style="font-size: larger; position:absolute; left:40%; background-color:whitesmoke;">Image To Image</b>
+      <button onclick="popupShutdown2();" class="Shutdownbutton" cursor= "pointer" >X</button>
+      <br>
+      <hr style="margin-bottom:0px;">
+      <div style="width:595px; height:812px; background-color:whitesmoke">
+        <!--파일 입력-->
+        <div class="box3">
+          <input id="filename" class="input" type="file" name="file">
+          <button onclick="fileselect();" style="background-color: whitesmoke; width: 90px; height: 40px; font-size: 12px; border-radius: 12px; margin-top: 23px; left: 0px;">파일 선택 완료</button>
+        </div>
+        <div style="background-color:whitesmoke; width:100%; display:block;">
+          <div style="background-color:whitesmoke; width:580px; display:flex; flex-direction:row">
+            <div style="background-color:whitesmoke; width:538px;height:650px;margin-bottom:-3px;">
+              <div id="pp" class="ppbox2">
+                <textarea id="prompt" cols="30" type = "text" placeholder="positive prompt를 입력하세요" name="ptext" style="height: 80px; width: 410px; margin: 0px; word-wrap: break-word; border-radius:10px; background-color:white;"></textarea>
+              </div>
+              <div style="display: flex; background-color: whitesmoke;">
+                <div style="background-color:whitesmoke; margin-top:2px; float:left;">
+                  <canvas id="cnvs" class="drawbox" width="512" height="514" style=" margin:13px"></canvas>   
+                </div>
+              </div>     
+              <button id="createbtn" onclick="sendData(); openResult(); return false;" class="createbtn" style="margin-top:-4px; margin-left:360px;">이미지 생성</button>  
+            </div>
+            <!-- 그림판 -->
+            <div class="toolbox">
+              <button id="btnSave" style="margin: 1px; width: 30px; border-radius:10px; background-color:white; float:right; vertical-align: middle;">저장하기</button>
+              <!-- 도트크기 -->
+              <select id="dot" style="margin: 1px; width: 30px; border-radius:10px; background-color:white; float:right; margin-right:2px; vertical-align: middle;">
+                  <option value="1">1px</option>
+                  <option value="2">2px</option>
+                  <option value="3">3px</option>
+                  <option value="4">4px</option>
+                  <option value="5">5px</option>
+                  <option value="6">6px</option>
+                  <option value="7">7px</option>
+                  <option value="8">8px</option>
+                  <option value="9">9px</option>
+                  <option value="10">10px</option>
+                  <option value="11">11px</option>
+                  <option value="12">12px</option>
+                  <option value="13">13px</option>
+                  <option value="14">14px</option>
+                  <option value="15">15px</option>
+              </select>
+              <button id="btnAllDel" style="margin: 1px; width: 30px; border-radius:10px; background-color:white; float:right; margin-right:2px; vertical-align: middle;">전체지우기</button>
+              <!-- 색깔 -->
+              <input type="color" id="color"  value="#ffffff" style="margin: 1px; width: 30px; height:40px; border-radius:10px; background-color:white; float:right; vertical-align: middle;"/>         
+              <button style="margin: 1px; width: 30px; height:105px; border:0px; border-radius:10px; background-color:whitesmoke; float:right; vertical-align: middle;" readonly>그리기 도구</button>
+            </div>  
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+    <script>
+        function popupShow(){
+            $(".popup").show();
+            popupShutdown2();
+        }
+        function popupShutdown(){
+          $(".popup").hide();
+        }
+        function popupShow2(){
+            $(".popup2").show();
+            popupShutdown();
+        }
+        function popupShutdown2(){
+          $(".popup2").hide();
+        }
+        /* popupShow,Shutdown3()있었던 곳 -07-28 */
+    </script>
+  </html>
