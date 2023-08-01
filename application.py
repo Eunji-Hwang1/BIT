@@ -22,8 +22,6 @@ from natsort import natsorted
 application = Flask(__name__)
 application.config["RED"] = 0
 
-client_id = "xOWKTKM4eSgEdm0ioV8M"
-client_secret = "8Z3An53CPh"
 
 #메인 사이트 출력
 @application.route("/")
