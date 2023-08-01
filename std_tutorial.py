@@ -30,8 +30,8 @@ def stdv1_5(pprompt, nprompt, filter):
     model_id = "runwayml/stable-diffusion-v1-5"
     ckpt_path = r"Stable-diffusion\pastelmix-fp16.safetensors"
     vae_repo = "lint/anime_vae"
-    lora_path = r"C:\Users\user\Desktop\STD\function\FilmVelvia2.safetensors"
-    vae_path = r"C:\Users\user\Desktop\STD\VAE\pastel-waifu-diffusion.vae.pt"
+    #lora_path = r"C:\Users\user\Desktop\STD\function\FilmVelvia2.safetensors"
+    #vae_path = r"C:\Users\user\Desktop\STD\VAE\pastel-waifu-diffusion.vae.pt"
     #pipe =CLIPTextModel.from_pretrained(model_id, subfolder="text_encoder", num_hidden_layers=11, torch_dtype=torch.float16)
     pipe = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float16)
     pipe = StableDiffusionPipeline.from_ckpt(ckpt_path, torch_dtype=torch.float16, num_hidden_layers=11)
