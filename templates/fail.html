@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Damion&family=Gowun+Dodum&family=Kalam&family=Monoton&family=Nanum+Brush+Script&display=swap" rel="stylesheet">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="" href="">
+        <title> Text-To-Image_fail </title>
+    </head>
+<style>
+    *{
+        color: #292D3E;
+        font-family: 'Gowun Dodum', sans-serif;
+    }
+
+    body{
+        margin: 0%;
+        background-color: #ffffff;
+    }
+
+    header{
+        width: 100%;
+        height: 80px;  
+        position: fixed;
+        box-sizing: border-box;
+        justify-content: center;
+        align-items: center;
+        text-align: center; 
+        background-color: #a7b3e9;
+        z-index: 6;
+        top: 0;
+    }
+
+    .contents{
+        width: 100%;
+        height: 100%;
+        /* margin-top: 5%; */
+        min-width: 1295px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .left{
+        width: 30%;
+        height: 100%;
+        text-align: center;
+        flex-basis: 100%;
+        padding: 0px 20px;
+    }
+
+    .center{
+        width: 30%;
+        height: 100%;
+        flex-basis: 100%;
+        padding: 0px 20px;
+    }
+
+    .right{
+        width: 30%;
+        height: 100%;
+        flex-basis: 450px;
+        padding: 0px 20px;
+    }
+
+    .condition{
+        margin-block-start: 8em;
+    }
+
+    .wrap-contents {
+        display: flex;
+    }
+
+    .leftside-bar{
+        width: 100%;
+        box-sizing: border-box;
+        background-color: #1b275e;   
+    }
+
+    /* '.'은 class를 사용할 때 */
+    .rightside-bar{
+        width: 100%;
+        box-sizing: border-box;
+        background-color: #1b275e;
+    }
+
+    /* '#'은 id를 사용할 때 */
+    #generateimg-button{
+        width: 48%;
+        height: 30px;
+        margin-block-end: 5em;
+    }
+
+    #backtofirst-button{
+        width: 48%;
+        height: 30px;
+        margin-block-end: 5em;
+    }
+</style>
+<script>
+    function sendData(){
+        var pp=document.getElementById("ptext").value
+        var np=document.getElementById("ntext").value
+        var f=document.getElementById("filter-num").value
+        var tcfg = document.getElementById("cfg").value;
+        var tsteps=document.getElementById("steps").value;
+        // 보낼 데이터를 객체로 생성
+        var dataToSend = {
+            ptext: pp,
+            ntext: np,
+            filter_num: f,
+            cfg:tcfg,
+            steps:tsteps
+        };
+      
+        $.ajax({
+            url: "/search", // 데이터를 받아올 서버 엔드포인트 URL
+            type: "get",
+            data: dataToSend, // 데이터를 JSON 문자열로 변환하여 전송
+            success: function(response) {
+                // 서버 응답을 받은 후 실행할 함수를 여기에 작성합니다.
+                // 예를 들어, 이미지를 렌더링하거나 다른 처리를 수행할 수 있습니다.
+                var image_url=response.image_file;
+                closeResult();
+                openResult(image_url);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+      }
+</script>
+<body>
+    <header>
+        <img src="/static/logo.png" style="display: inline-block; margin-top: 8px; border-radius: 10px;">
+    </header>
+            <div class="contents">
+                <div class="leftside-bar">
+                </div>
+                <!--  -->
+                <div class="left">
+                    <div class="condition">
+                        {%if index==1 %}
+                        <div>
+                            <p>이 문장(단어)로는 이미지를 생성 할 수 없습니다.</p>
+                        </div>
+                        <a href="/">
+                            <button type="submmit" id="backtofirst-button">
+                                처음 페이지로 돌아가기
+                            </button>
+                        </a>
+                        {%elif index==2 %}
+                        <div>
+                            <p>이 문장(단어)는 이미 생성한 적 있는 이미지입니다.</p>
+                        </div>
+                        <a href="/">
+                            <button type="submmit" id="backtofirst-button">
+                                처음 페이지로 돌아가기
+                            </button>
+                        </a>
+                        {% else %}
+                        <div class="flex-container">
+                            <a href="/">
+                                <p>처음부터 이미지 생성을 하고 싶다면<br>'처음 페이지로 돌아가기' 버튼을 선택해주세요.</p>
+                            <button type="submmit" id="backtofirst-button">
+                                처음 페이지로 돌아가기
+                            </button>
+                            </a>
+                        {% endif %}
+                        </div>
+                    </div>
+                    <div class="FCSN" style="display:block">
+                        <div class="filtercfg" style="text-align: center; margin-block-start: 5.4em;">
+                            <div>
+                            <p>filter</p>
+                            <textarea id="filter-num" type="text" value="{{filter}}" style="word-wrap: break-word; width: 85%; box-sizing: border-box;" readonly></textarea>
+                            </div>
+                            <p>cfg</p>
+                            <textarea id="cfg" type="text" value="{{filter}}" style="word-wrap: break-word; width: 85%; box-sizing: border-box;" readonly></textarea>
+                        </div>
+                        <div class="stepsnoise" style="text-align: center; margin-block-start: 3.4em;">
+                            <div>
+                            <p>steps</p>
+                            <textarea id="steps" type="text" value="{{filter}}" style="word-wrap: break-word; width: 85%; box-sizing: border-box;" readonly></textarea>
+                            </div>
+                            <div>
+                            <p>noise</p>
+                            <textarea id="noise" type="text" value="{{filter}}" style="word-wrap: break-word; width: 85%; box-sizing: border-box;" readonly></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+                <div class="center">
+                    <form action="/search" method="get" style="width:98%; display:inline; text-align: center;">
+                        <div style="margin:auto">
+                            <p style="margin-block-start: 8em;">이미지 생성을 다시 하고 싶다면<br> '이미지 다시 생성하기' 버튼을 선택해주세요.<br>재시도는 10번까지만 가능합니다.</p>
+                            <div> 
+                                <button type="submmit" id="generateimg-button">
+                                이미지 다시 생성하기
+                                </button>
+                            </div>
+                                <p style="margin-block-start: 3em;">사용했던 문장(단어)</p>
+                                <textarea id="ptext" type="text" value="{{pprompt}}" style="word-wrap: break-word; width: 100%; height: 180px; box-sizing: border-box;"></textarea>
+                                <p>사용했던 중요하지 않은 문장(단어)</p>
+                                <textarea id="ntext" type="text" value="{{nprompt}}" style="word-wrap: break-word; width: 100%; height: 180px; box-sizing: border-box;"></textarea>
+                        </div>
+                    </form>
+                </div>                    
+                <div class="rightside-bar">
+
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

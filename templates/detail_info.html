@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Damion&family=Gowun+Dodum&family=Kalam&family=Monoton&family=Nanum+Brush+Script&display=swap" rel="stylesheet">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="" href="">
+<title> Text-To-Image_previous-list_detail </title>
+
+<style>
+    *{
+        background-color: white;
+        color: #292D3E;
+        font-family: 'Gowun Dodum', sans-serif;
+    }
+    .allbody{
+        width: 98%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        text-align: center;
+        flex-wrap: wrap;
+        justify-content:center;
+        margin-top:120px;
+        z-index:1;
+    }
+    
+    .topbox{
+        width: 100%;
+        height: 95px;
+        border: 0px solid white;
+        box-sizing: border-box;
+        margin: 0 auto 20px; 
+        position: fixed;
+        top: 0%;
+        background-color: #a7b3e9;
+        transform: translateX(-50%);
+        transform:scale(1.2);
+        text-align: center; 
+        z-index: 6;
+    }
+    .container{
+        width: 1888px;
+        height: 580px;
+    }
+    .my_list_img{
+        width: 512px;
+        height: 648px;
+        border: 4px solid #6F86E7;
+        margin: 13px;
+    }
+    .my_list_lsit{
+        width: 400px;
+        height: 648px;
+        border: 4px solid #6F86E7;
+        margin:13px;
+        text-align: left;
+    }
+</style>
+</head>
+<body>
+    
+    <div class="topbox">
+        <img src="/static/logo.png" style="transform: scale(0.98); position:fixed; left:46.5%; top:18px; border-radius:10%;"/>
+    </div>
+    <div class="container">
+        <div class="allbody">    
+            <div class="my_list_img">
+                <h3>생성된 이미지</h3>
+                <img src={{url_for('static', filename=photo)}}>
+            </div>
+            <div class="my_list_lsit">
+                <h2 style="margin:12px;">
+                    <p style="width:50px;"> <h3>입력한 문장     :</h3>{{ pprompt }}</p>
+                    <p style="width:50px;"> <h3>제외할 문장     :</h3>{{ nprompt }}</p>
+                    <p style="width:50px;"> <h3>사용한 필터     :</h3>{{  filter }}</p>
+                    <p style="width:50px;"> <h3>사용한 파일     :</h3>{{  file }}</p>
+                    <p style="width:50px;"> <h3>cfg 값         :</h3>{{  cfg }}</p>
+                    <p style="width:50px;"> <h3>steps 수       :</h3>{{  steps }}</p>
+                    <p style="width:50px;"> <h3>noise 값       :</h3>{{  noise }}</p>
+                </h2>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
