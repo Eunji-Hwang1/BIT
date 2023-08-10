@@ -17,8 +17,10 @@
     <script src="{{ url_for('static', filename='css,js/popup.js') }}"></script>
   </head>
   <body>
-    <div class="topbox">      
-        <img src="/static/logo.png" style="transform: scale(1.2); position:fixed; left:46%; top:30px; border-radius:10%;"/>
+    <div class="topbox">   
+        <a href="{{url_for("home")}}">   
+          <button style="background-image: url('/static/logo.png');transform: scale(1.2); position:fixed; left:45%; top:34px; width:172px; height:55px; border:0px;"></button>
+        </a>
         <button onclick="popupShow();" id = "style_button1" class="style_button">Text To Image</button>
         <button onclick="popupShow2();" id="style_button2" class="style_button" style="position:absolute; width:160px; left:186px;">Image To Image</button>
         <button onclick="popupShow3();" id="style_button3" class="style_button2" style="">InPainting</button>
@@ -29,7 +31,8 @@
     </div>
     <div class="allbody" id="allbody">
       <div class="half">
-        <div style="width:100%;height: 45px;margin-top: 70px;display: flex;flex-direction: row;justify-content: center;">
+        <h2 style="color:antiquewhite; margin-top:70px">공개된 모든 이미지</h2>
+        <div style="width:100%;height: 45px; display: flex;flex-direction: row;justify-content: center;">
           <select id="stdname1" style="margin: 1px; width: 150px; height:40px; border-radius:10px; background-color:white; margin-right:2px; vertical-align: middle;">
             <option value="전체보기" style=" background-color: white;" selected>전체보기</option>
             <option value="Text To Image" style=" background-color: white;">Text To Image</option>
@@ -41,7 +44,7 @@
         </div>
         {% if stdlength != 0 or stdlength2!=0%}
         {% for list in std_list %}
-          <a href={{url_for("detail", index=list[0])}} style="width:360px; height:500px; display:flex; justify-content:center;">
+          <a href={{url_for("detail", index=list[0])}} style="width:360px; height:500px; display:flex; justify-content:center; align-items:center;">
               <div class="my_list">
                   <h2 style="background-color:white; border-radius:10%;" >
                       <div style="width:20px; margin:0px; margin-left:190px;">
@@ -59,7 +62,7 @@
           </a>
         {% endfor %}
         {% for list in std_list2 %}
-        <a href={{url_for("detail2", index=list[0])}} style="width:360px; height:500px; display:flex; justify-content:center;">
+        <a href={{url_for("detail2", index=list[0])}} style="width:360px; height:500px; display:flex; justify-content:center; align-items:center;">
           <div class="my_list">
               <h2 style="background-color:white; border-radius:10%;" >
                   <div style="width:20px; margin:0px; margin-left:190px;">
@@ -77,12 +80,13 @@
           </div>
         </a>
       {% endfor %}{%else%}
-        <h2>이미지를 생성해 주세요</h2>
+        <h2 style="color:antiquewhite; margin-top:70px">이미지를 생성해 주세요</h2>
         {% endif %}
       </div>
       <hr style="margin:8px;">
       <div class="half">
-        <div style="width:100%;height: 45px;margin-top: 70px;display: flex;flex-direction: row;justify-content: center;">
+        <h2 style="color:antiquewhite; margin-top:70px">내가 생성한 이미지</h2>
+        <div style="width:100%;height: 45px; display: flex;flex-direction: row;justify-content: center;">
           <select id="stdname2" style="margin: 1px; width: 150px; height:40px; border-radius:10px; background-color:white; margin-right:2px; vertical-align: middle;">
             <option value="전체보기" style=" background-color: white;" selected>전체보기</option>
             <option value="Text To Image" style=" background-color: white;">Text To Image</option>
@@ -94,7 +98,7 @@
         </div>
         {% if twolength != 0 or twolength2!=0%}
         {% for list in twofile_list %}
-          <a href={{url_for("detail", index=list[0])}} style="width:360px; height:500px; display:flex; justify-content:center;">
+          <a href={{url_for("detail", index=list[0])}} style="width:360px; height:500px; display:flex; justify-content:center; align-items:center;">
               <div class="my_list">
                   <h2 style="background-color:white; border-radius:10%;" >
                       <div style="width:20px; margin:0px; margin-left:190px;">
@@ -112,7 +116,7 @@
           </a>
         {% endfor %}
         {% for list in two_list %}
-        <a href={{url_for("detail2", index=list[0])}} style="width:360px; height:500px; display:flex; justify-content:center;">
+        <a href={{url_for("detail2", index=list[0])}} style="width:360px; height:500px; display:flex; justify-content:center; align-items:center;">
           <div class="my_list">
               <h2 style="background-color:white; border-radius:10%;" >
                   <div style="width:20px; margin:0px; margin-left:190px;">
@@ -130,7 +134,7 @@
           </div>
         </a>
       {% endfor %}{%else%}
-        <h2>이미지를 생성해 주세요</h2>
+        <h2 style="color:antiquewhite; margin-top:70px">UserId 입력 후 이미지를 생성해 주세요</h2>
         {% endif %}
       </div>
     </div>
@@ -160,8 +164,8 @@
           </div>
           <button id="createbtn" onclick="sendData();" class="createbtn" style="height:58px;">이미지 생성</button>
           <div style="background-color: whitesmoke; display:flex; flex-direction:row;">
-            <input type="radius" style="width:51px; background-color:whitesmoke; border:0px; margin-top:25px;" value="cfg 값: "readonly/>
-            <select name = "tcfg" style="background-color:whitesmoke; border-radius:10px;height:24px; margin-top:25px;">
+            <input type="radius" style="width:51px; background-color:whitesmoke; border:0px; margin-top:38px;" value="cfg 값: "readonly/>
+            <select id = "tcfg" style="background-color:whitesmoke; border-radius:10px;height:24px; margin-top:38px;">
               <option value ="7" style="background-color:whitesmoke;" selected>7</option>
               <option value ="9" style="background-color:whitesmoke;">9</option>
             </select>
@@ -169,9 +173,9 @@
           <div class="input-with-tooltip" style="background-color: whitesmoke; display:flex; flex-direction:row;">
             <input type="radius" style="width:54px; height:24px; background-color:whitesmoke; border:0px;" value="steps 수: " readonly/>
                 <span class="tooltip">"-steps 수는 15~45 사이의 값으로 입력해 주세요"</span>
-            <input type="text" style="width:35px; height:16px; border-radius:5px; background-color:whitesmoke; border:1px black solid; margin-top:3px;" id="tsteps" name="tsteps" value="45"/>
+            <input type="text" style="width:35px; height:16px; border-radius:5px; background-color:whitesmoke; border:1px black solid; margin-top:3px;" id="tsteps" name="tsteps" value="30"/>
           </div> 
-          <div style="background-color:whitesmoke; display:flex;">
+          <div style="background-color:whitesmoke; display:flex;margin-top:15px;">
             <input type="checkbox" id="open" name="open"value="1">
             <label for="open" style="background-color:whitesmoke;"> 공개</label><br>
             <input type="checkbox" id="close" name="close"value="0">
@@ -179,31 +183,36 @@
           </div>
         </div>
       </div>
-
+      <div style="background-color:whitesmoke; display:flex; flex-direction:column; justify-content:center; align-items:center">
+        <svg id="circle1" style="display: none; margin-top: 40px">
+          <circle cx="40" cy="40" r="40"></circle>
+        </svg>
+        <div id="loading" style="display: none; color: white; margin-bottom: 2px; position: relative; width: 250px; border-radius: 10px; margin-top:50px; height: 30px; text-align:center;">프로세스 중 ... 잠시 기다려주세요</div>
+      </div>
       <!-- 필터 선택 칸 -->
       <div style="display: block; background-color: whitesmoke; margin-top:-30px;">
-        <div class="filter">
-          <button style="margin:5px; border-radius: 25px; width: 75px; height: 90px;  background-color:white;"  onclick="selectfilter(1, 1)">
+        <div class="filter" id="popup1_filter">
+          <button class="p1filterbtn" style="width:76px;" onclick="selectfilter(1, 1)">
               <img src="/static/camping1_Compvis.jpeg" style="border-radius: 25px; width: 60px; height: 60px; background-color:white;" width="70px" height="80px;" />
               <b style="background-color:white; border-radius:10px; background-color:white;">CompVis</b>
           </button>
-          <button style="margin:5px; border-radius: 25px; width: 75px; height: 90px;  background-color:white;" onclick="selectfilter(1, 2)">
+          <button class="p1filterbtn" style="width:76px;" onclick="selectfilter(1, 2)">
               <img src="/static/camping2_Majic.jpeg" style="border-radius: 25px; width: 60px; height: 60px; background-color:white;" width="70px" height="80px;"/>
               <b style="background-color:white; border-radius:10px; background-color:white;">MagicMix</b>
           </button>
-          <button style="margin:5px; border-radius: 25px; width: 75px; height: 90px; background-color: white;" onclick="selectfilter(1, 3)">
+          <button class="p1filterbtn" style="width:76px;" onclick="selectfilter(1, 3)">
             <img src="/static/camping3_Ghibli1.jpeg" style="border-radius: 25px; width: 60px; height: 60px; background-color: white;" width="70px" height="80px;"/>
             <b style="background-color: white; border-radius: 10px; background-color: white;">Ghibli1</b>
           </button>
-          <button style="margin:5px; border-radius: 25px; width: 75px; height: 90px;  background-color:white;" onclick="selectfilter(1, 4)">
-              <img src="/static/camping4_Ghibli2.jpeg" style="border-radius: 25px; width: 60px; height: 60px; background-color:white;" width="70px" height="80px;"/>
-              <b style="background-color:white; border-radius:10px; background-color:white;">Ghibli2</b>
+          <button class="p1filterbtn" style="width:76px;" onclick="selectfilter(1, 4)">
+              <img src="/static/camping4_MintReal.jpeg" style="border-radius: 25px; width: 60px; height: 60px; background-color:white;" width="70px" height="80px;"/>
+              <b style="background-color:white; border-radius:10px; background-color:white;">MintReal</b>
           </button>
-          <button style="margin:5px; border-radius: 25px; width: 75px; height: 90px;  background-color:white;" onclick="selectfilter(1, 5)">
+          <button class="p1filterbtn" style="width:76px;" onclick="selectfilter(1, 5)">
               <img src="/static/camping5_pastel.jpeg" style="border-radius: 25px; width: 60px; height: 60px; background-color:white;" width="70px" height="80px;"/>
               <b style="background-color:white; border-radius:10px; background-color:white;">PastelMix</b>
           </button>
-          <button style="margin:5px; border-radius: 25px; width: 75px; height: 90px;  background-color:white;" onclick="selectfilter(1, 6)">
+          <button class="p1filterbtn" style="width:76px;" onclick="selectfilter(1, 6)">
               <img src="/static/camping6_Cetus.jpeg" style="border-radius: 25px; width: 60px; height: 60px; background-color:white;" width="70px" height="80px;"/>
               <b style="background-color:white; border-radius:10px; background-color:white;">CetusMix</b>
           </button>
@@ -242,7 +251,7 @@
                   <div class="input-with-tooltip "style="background-color: whitesmoke; display:flex; flex-direction:row;">
                     <input type="radius" style="width:54px; height:24px; margin-left:10px; background-color:whitesmoke; border:0px;" value="steps 수:"  readonly/>
                         <span class="tooltip" style="position: absolute; left: -40px;">"-steps 수는 20~100 사이의 값으로 입력해 주세요"</span>
-                    <input type="text" style="width:35px; height:16px; border-radius:5px; background-color:whitesmoke; border:1px black solid; margin-top:3px;" id="isteps" name="isteps" value="30"/>
+                    <input type="text" style="width:35px; height:16px; border-radius:5px; background-color:whitesmoke; border:1px black solid; margin-top:3px;" id="isteps" name="isteps" value="50"/>
                   </div>  
                 </div>
               <div class="input-with-tooltip" style="background-color: whitesmoke; display:flex; flex-direction:row;">
@@ -266,32 +275,40 @@
                   <canvas id="cnvs" class="drawbox" width="512" height="514" style=" margin:13px"></canvas>   
                 </div>
             </div>
-            <div class="filter" style="width:340px; height:20px; margin-top:-10px;">
-              <button style="margin:5px; border-radius: 25px; width: 70px; height: 90px;  background-color:white;" onclick="selectfilter(2,1)">
+            <div class="filter" style="width:340px; height:20px; margin-top:-10px;" id="popup2_filter">
+              <button class="filterbtn" onclick="selectfilter(2,1)">
                   <img src="/static/camping2_Majic.jpeg" style="border-radius: 25px; width: 55px; height: 60px; background-color:white;" width="70px" height="80px;"/>
                   <b style="background-color:white; border-radius:10px; background-color:white; font-size:12px;">MagicMix</b>
               </button>
-              <button style="margin:5px; border-radius: 25px; width: 70px; height: 90px;  background-color:white;" onclick="selectfilter(2,2)">
+              <button class="filterbtn" onclick="selectfilter(2,2)">
                   <img src="/static/camping3_Ghibli1.jpeg" style="border-radius: 25px; width: 55px; height: 60px; background-color:white;" width="70px" height="80px;"/>
-                  <b style="background-color:white; border-radius:10px; background-color:white; font-size:12px;">Ghibli1</b>
+                  <b style="background-color:white; border-radius:10px; background-color:white; font-size:12px;">Ghibli</b>
               </button>
-              <button style="margin:5px; border-radius: 25px; width: 70px; height: 90px;  background-color:white;" onclick="selectfilter(2,3)">
-                  <img src="/static/camping5_pastel.jpeg" style="border-radius: 25px; width: 55px; height: 60px; background-color:white;" width="70px" height="80px;"/>
-                  <b style="background-color:white; border-radius:10px; background-color:white; font-size:12px;">PastelMix</b>
+              <button class="filterbtn" onclick="selectfilter(2,3)">
+                  <img src="/static/camping4_MintReal.jpeg" style="border-radius: 25px; width: 55px; height: 60px; background-color:white;" width="70px" height="80px;"/>
+                  <b style="background-color:white; border-radius:10px; background-color:white; font-size:12px;">MintReal</b>
               </button>
-              <button style="margin:5px; border-radius: 25px; width: 70px; height: 90px;  background-color:white;"  onclick="selectfilter(2,4)">
+              <button class="filterbtn"  onclick="selectfilter(2,4)">
                   <img src="/static/camping6_Cetus.jpeg" style="border-radius: 25px; width: 55px; height: 60px; background-color:white;" width="70px" height="80px;" />
                   <b style="background-color:white; border-radius:10px; background-color:white; font-size:12px;">CetusMix</b>
               </button>
             </div>
-            <div style="background-color:whitesmoke; display:flex; flex-direction:column; margin-left:360px; margin-top:-14px">
+            <div style="background-color:whitesmoke; display:flex; flex-direction:column; margin-left:360px; margin-top:-14px" id="popup2_buttons">
               <div style="background-color: whitesmoke; display:flex; flex-direction:row;">
                 <input type="radius" style="width:72px; background-color:whitesmoke; border:0px;" value="선택된 필터: "/>
                 <input type="text" style="width:77px; background-color:whitesmoke; border:0px;" id="sfilter2" name="filter2" value=""/>
               </div>
-              <button id="sendBtn" class="createbtn" style="margin=0px;">이미지 생성</button> 
+              <button id="sendBtn" class="createbtn" style="margin:0px;">이미지 생성</button> 
             </div>
           </div>
+
+          <div style="background-color:whitesmoke; display:none; flex-direction:column; justify-content:center; align-items:center; margin-right:140px;" id="popup2_div">
+            <svg id="circle2" style="display: none; margin-top: 100px; margin-left: 80px;">
+              <circle cx="40" cy="40" r="40"></circle>
+            </svg>
+            <div id="loading1" style="display: none; color: white; margin-bottom: 2px; position: relative; width: 230px; border-radius: 10px; margin-top:50px; height: 30px; margin-left:10px; text-align:center;">프로세스 중 ... 잠시 기다려주세요</div>
+          </div>
+
           <!-- 그림판 -->
           <div class="toolbox" >
             <button id="btnSave" style="margin: 1px; width: 30px; border-radius:10px; background-color:white; float:right; vertical-align: middle;">저장하기</button>
@@ -354,25 +371,25 @@
                   <canvas id="cnvs3" class="drawbox" width="512" height="512" style="position: absolute; top:185px; left:29px; background-color:transparent;"></canvas>   
                 </div>
               </div>       
-              <div class="filter" style="width:340px; height:20px; margin-top:-10px;">
-                <button style="margin:5px; border-radius: 25px; width: 70px; height: 90px;  background-color:white;" onclick="selectfilter(3,1)">
+              <div class="filter" style="width:340px; height:20px; margin-top:-10px;" id="popup3_filter">
+                <button class="filterbtn" onclick="selectfilter(3,1)">
                     <img src="/static/camping2_Majic.jpeg" style="border-radius: 25px; width: 55px; height: 60px; background-color:white;" width="70px" height="80px;"/>
                     <b style="background-color:white; border-radius:10px; background-color:white; font-size:12px;">MagicMix</b>
                 </button>
-                <button style="margin:5px; border-radius: 25px; width: 70px; height: 90px;  background-color:white;" onclick="selectfilter(3,2)">
+                <button class="filterbtn" onclick="selectfilter(3,2)">
                     <img src="/static/camping3_Ghibli1.jpeg" style="border-radius: 25px; width: 55px; height: 60px; background-color:white;" width="70px" height="80px;"/>
-                    <b style="background-color:white; border-radius:10px; background-color:white; font-size:12px;">Ghibli1</b>
+                    <b style="background-color:white; border-radius:10px; background-color:white; font-size:12px;">Ghibli</b>
                 </button>
-                <button style="margin:5px; border-radius: 25px; width: 70px; height: 90px;  background-color:white;" onclick="selectfilter(3,3)">
+                <button class="filterbtn" onclick="selectfilter(3,3)">
                     <img src="/static/camping5_pastel.jpeg" style="border-radius: 25px; width: 55px; height: 60px; background-color:white;" width="70px" height="80px;"/>
                     <b style="background-color:white; border-radius:10px; background-color:white; font-size:12px;">PastelMix</b>
                 </button>
-                <button style="margin:5px; border-radius: 25px; width: 70px; height: 90px;  background-color:white;"  onclick="selectfilter(3,4)">
-                    <img src="/static/camping6_Cetus.jpeg" style="border-radius: 25px; width: 55px; height: 60px; background-color:white;" width="70px" height="80px;" />
-                    <b style="background-color:white; border-radius:10px; background-color:white; font-size:12px;">CetusMix</b>
+                <button class="filterbtn"  onclick="selectfilter(3,4)">
+                    <img src="/static/camping4_MintReal.jpeg" style="border-radius: 25px; width: 55px; height: 60px; background-color:white;" width="70px" height="80px;" />
+                    <b style="background-color:white; border-radius:10px; background-color:white; font-size:12px;">MintReal</b>
                 </button>
               </div>
-              <div style="background-color:whitesmoke; display:flex; flex-direction:column; margin-left:360px; margin-top:-14px">
+              <div style="background-color:whitesmoke; display:flex; flex-direction:column; margin-left:360px; margin-top:-14px" id="popup3_buttons">
                 <div style="background-color: whitesmoke; display:flex; flex-direction:row;">
                   <input type="radius" style="width:72px; background-color:whitesmoke; border:0px;" value="선택된 필터: "/>
                   <input type="text" style="width:77px; background-color:whitesmoke; border:0px;" id="sfilter3" name="filter3" value=""/>
@@ -380,6 +397,14 @@
                 <button id="sendBtn3" class="createbtn" style="margin-top:1px; margin-left:0px;">이미지 생성</button>
               </div>
             </div>
+
+            <div style="background-color:whitesmoke; display:none; flex-direction:column; justify-content:center; align-items:center; margin-right:140px;" id="popup3_div">
+              <svg id="circle3" style="display: none; margin-top: 90px; margin-left:75px;">
+                <circle cx="40" cy="40" r="40"></circle>
+              </svg>
+              <div id="loading2" style="display: none; color: white; margin-bottom: 2px; position: relative; width: 222px; border-radius: 10px; margin-top:50px; height: 30px; text-align:center;">프로세스 중 ... 잠시 기다려주세요</div>
+            </div>
+
             <!-- 그림판 -->
             <div class="toolbox">
               <button id="btnSave3" style="margin: 1px; width: 30px; border-radius:10px; background-color:white; float:right; vertical-align: middle;">저장하기</button>
@@ -435,6 +460,14 @@
             </div>
           </div>
         </div>
+
+        <div style="background-color:whitesmoke; display:none; flex-direction:column; justify-content:center; align-items:center; margin-right:140px;" id="popup4_div">
+          <svg id="circle4" style="display: none; margin-top: 110px; margin-left:245px;">
+            <circle cx="40" cy="40" r="40"></circle>
+          </svg>
+          <div id="loading3" style="display: none; color: white; margin-bottom: 2px; position: relative; width: 222px; border-radius: 10px; margin-top:50px; height: 30px; margin-left:180px; text-align:center;">프로세스 중 ... 잠시 기다려주세요</div>
+        </div>
+
         <div style="background-color:whitesmoke; width:100%; margin-left:26px; display:flex; flex-direction:row">
           <div style="background-color:whitesmoke; width:538px;height:620px;margin-bottom:-3px;">              
             <div style="display: flex; background-color: whitesmoke;">
@@ -442,25 +475,25 @@
                 <img id="poseimg" class="drawbox" width="512" height="514" style=" margin:13px"></img>   
               </div>
             </div>     
-            <div class="filter" style="width:340px; height:20px; margin-left:20px; margin-top:-10px;">
-              <button style="margin:5px; border-radius: 25px; width: 70px; height: 90px;  background-color:white;" onclick="selectfilter(4,1)">
+            <div class="filter" style="width:340px; height:20px; margin-left:20px; margin-top:-10px;" id="popup4_filter">
+              <button class="filterbtn" onclick="selectfilter(4,1)">
                   <img src="/static/camping2_Majic.jpeg" style="border-radius: 25px; width: 55px; height: 60px; background-color:white;" width="70px" height="80px;"/>
                   <b style="background-color:white; border-radius:10px; background-color:white; font-size:12px;">MagicMix</b>
               </button>
-              <button style="margin:5px; border-radius: 25px; width: 70px; height: 90px;  background-color:white;" onclick="selectfilter(4,2)">
+              <button class="filterbtn" onclick="selectfilter(4,2)">
                   <img src="/static/camping3_Ghibli1.jpeg" style="border-radius: 25px; width: 55px; height: 60px; background-color:white;" width="70px" height="80px;"/>
-                  <b style="background-color:white; border-radius:10px; background-color:white; font-size:12px;">Ghibli1</b>
+                  <b style="background-color:white; border-radius:10px; background-color:white; font-size:12px;">Ghibli</b>
               </button>
-              <button style="margin:5px; border-radius: 25px; width: 70px; height: 90px;  background-color:white;" onclick="selectfilter(4,3)">
-                  <img src="/static/camping5_pastel.jpeg" style="border-radius: 25px; width: 55px; height: 60px; background-color:white;" width="70px" height="80px;"/>
-                  <b style="background-color:white; border-radius:10px; background-color:white; font-size:12px;">PastelMix</b>
+              <button class="filterbtn" onclick="selectfilter(4,3)">
+                  <img src="/static/camping4_MintReal.jpeg" style="border-radius: 25px; width: 55px; height: 60px; background-color:white;" width="70px" height="80px;"/>
+                  <b style="background-color:white; border-radius:10px; background-color:white; font-size:12px;">MintReal</b>
               </button>
-              <button style="margin:5px; border-radius: 25px; width: 70px; height: 90px;  background-color:white;"  onclick="selectfilter(4,4)">
+              <button class="filterbtn"  onclick="selectfilter(4,4)">
                 <img src="/static/camping6_Cetus.jpeg" style="border-radius: 25px; width: 55px; height: 60px; background-color:white;" width="70px" height="80px;" />
                 <b style="background-color:white; border-radius:10px; background-color:white; font-size:12px;">CetusMix</b>
               </button>
             </div>
-            <div style="background-color:whitesmoke; display:flex; flex-direction:column; margin-left:360px; margin-top:-14px">
+            <div style="background-color:whitesmoke; display:flex; flex-direction:column; margin-left:360px; margin-top:-14px" id="popup4_buttons">
               <div style="background-color: whitesmoke; display:flex; flex-direction:row;">
                 <input type="radius" style="width:72px; background-color:whitesmoke; border:0px;" value="선택된 필터: "/>
                 <input type="text" style="width:77px; background-color:whitesmoke; border:0px;" id="sfilter4" name="filter4" value=""/>
@@ -471,5 +504,41 @@
         </div>
       </div>
     </div>
+    <script>
+      $(document).ready(function() {
+        $('#createbtn').click(function() {
+            $('#popup1_filter').hide();
+            $('#loading').show();
+            $('#circle1').show();
+            //var popupElement = document.getElementById('popup');
+            //popupElement.style.pointerEvents = 'none';
+        })
+        $('#sendBtn').click(function() {
+            $('#cnvs').hide();
+            $('#popup2_filter').hide();
+            $('#popup2_buttons').hide();
+            $('#popup2_div').show();
+            $('#loading1').show();
+            $('#circle2').show();
+        })
+        $('#sendBtn3').click(function() {
+            $('#backgroundCanvas').hide();
+            $('#cnvs3').hide();
+            $('#popup3_filter').hide();
+            $('#popup3_buttons').hide();
+            $('#popup3_div').show();
+            $('#loading2').show();
+            $('#circle3').show();
+        })
+        $('#sendBtn4').click(function() {
+            $('#poseimg').hide();
+            $('#popup4_filter').hide();
+            $('#popup4_buttons').hide();
+            $('#popup4_div').show();
+            $('#loading3').show();
+            $('#circle4').show();
+        })
+        });
+    </script>
   </body>
   </html>

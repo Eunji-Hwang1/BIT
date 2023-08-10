@@ -17,7 +17,7 @@
         font-family: 'Gowun Dodum', sans-serif;
     }
     .allbody{
-        width: 98%;
+        width: 100%;
         height: 100%;
         display: flex;
         flex-direction: row;
@@ -43,18 +43,20 @@
         z-index: 6;
     }
     .container{
-        width: 1888px;
-        height: 580px;
+        width: auto;
+        min-width: 1000px;
+        height: 600px;
     }
     .my_list_img{
         width: 512px;
-        height: 648px;
+        height: 576px;
         border: 4px solid #6F86E7;
         margin: 13px;
     }
     .my_list_lsit{
-        width: 400px;
-        height: 648px;
+        width: auto;
+        max-width:1270px;
+        height: 576px;
         border: 4px solid #6F86E7;
         margin:13px;
         text-align: left;
@@ -64,7 +66,9 @@
 <body>
     
     <div class="topbox">
-        <img src="/static/logo.png" style="transform: scale(0.98); position:fixed; left:46.5%; top:18px; border-radius:10%;"/>
+        <a href="{{url_for("home")}}">   
+            <button style="background-image: url('/static/logo.png'); position:fixed; left:45%; top:25px; width:172px; height:55px; border:0px;"></button>
+        </a>    
     </div>
     <div class="container">
         <div class="allbody">    
@@ -74,13 +78,30 @@
             </div>
             <div class="my_list_lsit">
                 <h2 style="margin:12px;">
-                    <p style="width:50px;"> <h3>입력한 문장     :</h3>{{ pprompt }}</p>
-                    <p style="width:50px;"> <h3>제외할 문장     :</h3>{{ nprompt }}</p>
-                    <p style="width:50px;"> <h3>사용한 필터     :</h3>{{  filter }}</p>
-                    <p style="width:50px;"> <h3>사용한 파일     :</h3>{{  file }}</p>
-                    <p style="width:50px;"> <h3>cfg 값         :</h3>{{  cfg }}</p>
-                    <p style="width:50px;"> <h3>steps 수       :</h3>{{  steps }}</p>
-                    <p style="width:50px;"> <h3>noise 값       :</h3>{{  noise }}</p>
+                    <div style="display: flex; flex-direction: row;">
+                        <h5 style="width:80px; height:27px; margin:0px;">User Id        :</h5><p style="height:27px; font-size: 18px; font-weight: lighter; margin:0px;">{{ userid }}</p>
+                        <h5 style="width:120px; height:27px; margin:0px; margin-left: 15px;">사용한 기능     :</h5><p style="height:27px; font-size: 18px; font-weight: lighter; margin:0px;">{{ stdname }}</p>
+                    </div>
+                    <div style="display: flex; flex-direction: column; margin-top:12px;">
+                        <h5 style="width:auto; height:auto; margin:0px;">입력한 문장        :</h5><p style="height:auto; font-size: 15px; font-weight: lighter; margin:4px; margin-right:10px">{{ pprompt }}</p>
+                    </div>
+                    <div style="display: flex; flex-direction: column; margin-top:12px;">
+                        <h5 style="width:auto; height:auto; margin:0px;">제외할 문장        :</h5><p style="height:auto; font-size: 15px; font-weight: lighter; margin:4px; margin-right:10px">{{ nprompt }}</p>
+                    </div>
+                    <div style="display: flex; flex-direction: row;margin-top:12px;">
+                        <h5 style="width:auto; height:27px; margin:0px;">사용한 파일        :</h5><p style="height:auto; font-size: 15px; font-weight: lighter; margin:4px; margin-right:10px">{{ file }}</p>
+                    </div>            
+                    <div style="display: flex; flex-direction: row;margin-top:12px;">
+                        <h5 style="width:auto; height:27px; margin:0px;">사용한 필터        :</h5><p style="height:27px; font-size: 15px; font-weight: lighter; margin:4px; margin-right:10px">{{ filter }}</p>
+                    </div>
+                    <div style="display: flex; flex-direction: row;margin-top:12px;">
+                        <h5 style="width:auto; height:27px; margin:0px;">cfg 값        :</h5><p style="height:27px; font-size: 15px; font-weight: lighter; margin:4px; margin-right:10px">{{ cfg }}</p>
+                        <h5 style="width:auto; height:27px; margin:0px; margin-left:15px;">steps 수      :</h5><p style="height:27px; font-size: 15px; font-weight: lighter; margin:4px;">{{ steps }}</p>
+                    </div>                    
+                    <div style="display: flex; flex-direction: row;margin-top:12px;">
+                        <h5 style="width:auto; height:27px; margin:0px;">noise 값        :</h5><p style="height:27px; font-size: 15px; font-weight: lighter; margin:4px; margin-right:10px">{{ noise }}</p>
+                        <h5 style="width:auto; height:27px; margin:0px; margin-left:22px">공개 여부     :</h5><p style="height:27px; font-size: 15px; font-weight: lighter; margin:4px;">{{ share }}</p>
+                    </div>
                 </h2>
             </div>
         </div>
